@@ -9,13 +9,13 @@ import SwiftUI
 import Combine
 
 public struct SoftwareKeyboard {
-    enum Status {
+    public enum Status {
         case willShow, willHide, didShow, didHide
     }
     
-    let status: Status
+    public let status: Status
     
-    var isVisible: Bool {
+    public var isVisible: Bool {
         switch status {
         case .willShow, .didShow:
             return true
@@ -24,7 +24,7 @@ public struct SoftwareKeyboard {
         }
     }
     
-    func dismiss() {
+    public func dismiss() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
