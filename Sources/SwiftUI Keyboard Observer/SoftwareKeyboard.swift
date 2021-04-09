@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-struct SoftwareKeyboard {
+public struct SoftwareKeyboard {
     enum Status {
         case willShow, willHide, didShow, didHide
     }

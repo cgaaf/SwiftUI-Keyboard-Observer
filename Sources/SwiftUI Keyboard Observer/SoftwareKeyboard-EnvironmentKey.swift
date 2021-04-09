@@ -6,11 +6,11 @@
 //
 import SwiftUI
 
-private struct KeyboardIsVisible: EnvironmentKey {
-    static let defaultValue: SoftwareKeyboard? = nil
+public struct KeyboardIsVisible: EnvironmentKey {
+    public static let defaultValue: SoftwareKeyboard? = nil
 }
 
-extension EnvironmentValues {
+public extension EnvironmentValues {
     var softwareKeyboard: SoftwareKeyboard? {
         get { self[KeyboardIsVisible.self] }
         set { self[KeyboardIsVisible.self] = newValue }
