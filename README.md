@@ -1,9 +1,12 @@
 # SwiftUI Keyboard Observer
 
-A description of this package.
+This package adds a view extension which adds an iOS software keyboard observer to the environment.
+
+More documentation and updates to come. This is a very early draft. I appreciate any feedback or contributions!
 
 ```swift
 import SwiftUI
+import SwiftUI_Keyboard_Observer
 
 @main
 struct MyApp: App {
