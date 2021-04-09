@@ -17,7 +17,7 @@ struct SoftwareKeyboardContainer<Content: View>: View {
     }
 }
 
-extension View {
+public extension View {
     func observeSoftwareKeyboard() -> some View {
         SoftwareKeyboardContainer {
             self
