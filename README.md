@@ -2,7 +2,7 @@
 
 A description of this package.
 
-```
+```swift
 import SwiftUI
 
 @main
