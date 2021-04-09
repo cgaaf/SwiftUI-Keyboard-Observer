@@ -3,7 +3,6 @@
 A description of this package.
 
 ```
-{
 import SwiftUI
 
 @main
@@ -34,6 +33,5 @@ struct ContentView: View {
             }
         }
     }
-}
 }
 ```
