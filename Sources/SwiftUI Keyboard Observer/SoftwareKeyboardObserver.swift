@@ -17,7 +17,6 @@ class SoftwareKeyboardObserver: ObservableObject {
         NotificationCenter.default
             .publisher(for: UIApplication.keyboardWillShowNotification)
             .sink { _ in
-                print("Keyboard will show")
                 self.softwareKeyboard = SoftwareKeyboard(status: .willShow)
             }
             .store(in: &cancellables)
@@ -25,7 +24,6 @@ class SoftwareKeyboardObserver: ObservableObject {
         NotificationCenter.default
             .publisher(for: UIApplication.keyboardDidShowNotification)
             .sink { _ in
-                print("Keyboard did show")
                 self.softwareKeyboard = SoftwareKeyboard(status: .didShow)
             }
             .store(in: &cancellables)
@@ -33,7 +31,6 @@ class SoftwareKeyboardObserver: ObservableObject {
         NotificationCenter.default
             .publisher(for: UIApplication.keyboardWillHideNotification)
             .sink { _ in
-                print("Keyboard will hide")
                 self.softwareKeyboard = SoftwareKeyboard(status: .willHide)
             }
             .store(in: &cancellables)
@@ -41,7 +38,6 @@ class SoftwareKeyboardObserver: ObservableObject {
         NotificationCenter.default
             .publisher(for: UIApplication.keyboardDidHideNotification)
             .sink { _ in
-                print("Keyboard did hide")
                 self.softwareKeyboard = SoftwareKeyboard(status: .didHide)
             }
             .store(in: &cancellables)
