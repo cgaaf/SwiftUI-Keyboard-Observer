@@ -38,3 +38,5 @@ struct ContentView: View {
     }
 }
 ```
+
+![](sample.gif)
