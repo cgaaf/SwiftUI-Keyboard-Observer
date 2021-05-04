@@ -8,43 +8,28 @@
 import SwiftUI
 import Combine
 
-@propertyWrapper
 public class SoftwareKeyboardObserver: ObservableObject {
     @Published private(set) var softwareKeyboard: SoftwareKeyboard?
-    
-    var cancellables = Set<AnyCancellable>()
-    
-    public var wrappedValue: SoftwareKeyboard? {
-        softwareKeyboard
-    }
     
     public init() {
         NotificationCenter.default
             .publisher(for: UIApplication.keyboardWillShowNotification)
-            .sink { _ in
-                self.softwareKeyboard = SoftwareKeyboard(status: .willShow)
-            }
-            .store(in: &cancellables)
+            .map { _ in SoftwareKeyboard(status: .willShow) }
+            .assign(to: &$softwareKeyboard)
         
         NotificationCenter.default
             .publisher(for: UIApplication.keyboardDidShowNotification)
-            .sink { _ in
-                self.softwareKeyboard = SoftwareKeyboard(status: .didShow)
-            }
-            .store(in: &cancellables)
+            .map { _ in SoftwareKeyboard(status: .didShow) }
+            .assign(to: &$softwareKeyboard)
         
         NotificationCenter.default
             .publisher(for: UIApplication.keyboardWillHideNotification)
-            .sink { _ in
-                self.softwareKeyboard = SoftwareKeyboard(status: .willHide)
-            }
-            .store(in: &cancellables)
+            .map { _ in SoftwareKeyboard(status: .willHide) }
+            .assign(to: &$softwareKeyboard)
         
         NotificationCenter.default
             .publisher(for: UIApplication.keyboardDidHideNotification)
-            .sink { _ in
-                self.softwareKeyboard = SoftwareKeyboard(status: .didHide)
-            }
-            .store(in: &cancellables)
+            .map { _ in SoftwareKeyboard(status: .didHide) }
+            .assign(to: &$softwareKeyboard)
     }
 }
