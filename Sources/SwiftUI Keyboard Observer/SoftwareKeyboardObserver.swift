@@ -8,10 +8,15 @@
 import SwiftUI
 import Combine
 
+@propertyWrapper
 class SoftwareKeyboardObserver: ObservableObject {
     @Published private(set) var softwareKeyboard: SoftwareKeyboard?
     
     var cancellables = Set<AnyCancellable>()
+    
+    var wrappedValue: SoftwareKeyboard? {
+        softwareKeyboard
+    }
     
     init() {
         NotificationCenter.default
@@ -41,9 +46,5 @@ class SoftwareKeyboardObserver: ObservableObject {
                 self.softwareKeyboard = SoftwareKeyboard(status: .didHide)
             }
             .store(in: &cancellables)
-    }
-    
-    func dismiss() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
