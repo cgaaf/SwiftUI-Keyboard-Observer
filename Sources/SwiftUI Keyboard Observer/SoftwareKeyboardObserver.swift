@@ -9,42 +9,45 @@ import SwiftUI
 import Combine
 
 @propertyWrapper
-public class SoftwareKeyboardObserver: ObservableObject {
-    @Published private(set) var softwareKeyboard: SoftwareKeyboard?
-    
+public struct SoftwareKeyboardObserver: DynamicProperty {
+    let keyboardSubject = CurrentValueSubject<SoftwareKeyboard?, Never>(nil)
     var cancellables = Set<AnyCancellable>()
     
     public var wrappedValue: SoftwareKeyboard? {
-        softwareKeyboard
+        keyboardSubject.value
     }
     
     public init() {
         NotificationCenter.default
             .publisher(for: UIApplication.keyboardWillShowNotification)
-            .sink { _ in
-                self.softwareKeyboard = SoftwareKeyboard(status: .willShow)
+            .map { _ in
+                SoftwareKeyboard(status: .willShow)
             }
+            .subscribe(keyboardSubject)
             .store(in: &cancellables)
         
         NotificationCenter.default
             .publisher(for: UIApplication.keyboardDidShowNotification)
-            .sink { _ in
-                self.softwareKeyboard = SoftwareKeyboard(status: .didShow)
+            .map { _ in
+                SoftwareKeyboard(status: .didShow)
             }
+            .subscribe(keyboardSubject)
             .store(in: &cancellables)
         
         NotificationCenter.default
             .publisher(for: UIApplication.keyboardWillHideNotification)
-            .sink { _ in
-                self.softwareKeyboard = SoftwareKeyboard(status: .willHide)
+            .map { _ in
+                SoftwareKeyboard(status: .willHide)
             }
+            .subscribe(keyboardSubject)
             .store(in: &cancellables)
         
         NotificationCenter.default
             .publisher(for: UIApplication.keyboardDidHideNotification)
-            .sink { _ in
-                self.softwareKeyboard = SoftwareKeyboard(status: .didHide)
+            .map { _ in
+                SoftwareKeyboard(status: .didHide)
             }
+            .subscribe(keyboardSubject)
             .store(in: &cancellables)
     }
 }
