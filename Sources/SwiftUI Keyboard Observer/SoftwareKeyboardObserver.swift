@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 @propertyWrapper
-public struct SoftwareKeyboardObserver {
+public struct SoftwareKeyboardObserver: DynamicProperty {
     let keyboardSubject = CurrentValueSubject<SoftwareKeyboard?, Never>(nil)
     var cancellables = Set<AnyCancellable>()
     
