@@ -9,16 +9,16 @@ import SwiftUI
 import Combine
 
 @propertyWrapper
-class SoftwareKeyboardObserver: ObservableObject {
+public class SoftwareKeyboardObserver: ObservableObject {
     @Published private(set) var softwareKeyboard: SoftwareKeyboard?
     
     var cancellables = Set<AnyCancellable>()
     
-    var wrappedValue: SoftwareKeyboard? {
+    public var wrappedValue: SoftwareKeyboard? {
         softwareKeyboard
     }
     
-    init() {
+    public init() {
         NotificationCenter.default
             .publisher(for: UIApplication.keyboardWillShowNotification)
             .sink { _ in
